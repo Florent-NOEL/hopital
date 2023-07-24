@@ -4,9 +4,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import dao.DaoPatient;
+import dao.DaoPatientJdbcImpl;
+
 public class JdbcContext {
     private Connection connection;
 	private static JdbcContext singleton = null;
+	private static DaoPatient daoPatient = new DaoPatientJdbcImpl();
+	
+	public static DaoPatient getDaoPatient() {
+		return daoPatient;
+	}
 
     static {
 		try {

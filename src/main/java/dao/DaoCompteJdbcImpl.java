@@ -38,7 +38,7 @@ public class DaoCompteJdbcImpl implements DaoCompte {
 
 		try {
 			ps = JdbcContext.getContext().getConnection().prepareStatement(
-					"insert into compte compte_login=?, compte_password=?, compte_typeCompte=? where compte_id=?");
+					"Update compte set compte_login=?, compte_password=?, compte_typeCompte=? where compte_id=?");
 			ps.setString(1, obj.getLogin());
             ps.setString(2, obj.getPassword());
             ps.setString(3, obj.getTypeCompte());

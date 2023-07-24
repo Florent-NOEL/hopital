@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import dao.DaoPatient;
 import model.Patient;
+import model.Secretaire;
 
 
 public class App {
@@ -19,11 +20,13 @@ public class App {
 
 	public static void secretaire(){
 		DaoPatient daoPatient = JdbcContext.getDaoPatient();
-
+		Secretaire secretaire1 = new Secretaire("flora", "123");
 		String nom = saisieString("nom du patient");
 		String prenom = saisieString("prenom");
-		daoPatient.findByNomPrenom(nom,prenom);	
-
+		Patient patient = new Patient(nom, prenom);
+		secretaire1.addPatients(patient);
+		secretaire1.ecrireListePatients();
+		
 	}
 
 	public static void medecin(){

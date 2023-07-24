@@ -147,13 +147,15 @@ public class DaoPatientJdbcImpl implements DaoPatient {
 		ResultSet rs = null;
 		try {
 			ps = JdbcContext.getContext().getConnection()
-					.prepareStatement("select * from patient"
-							+ "where patient_nom=? and patient_prenom=?");
+					.prepareStatement("select * from patient where patient_nom=? and patient_prenom=?");
 			ps.setString(1, nom);
 			ps.setString(2, prenom);
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				patient = getPatient(rs);
+				if(rs.getInt("patient_id") != 0){
+					patient.setId(rs.getInt("patient_id"));
+				} else{patient.setId(0);}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

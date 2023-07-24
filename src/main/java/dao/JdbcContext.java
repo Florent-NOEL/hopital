@@ -7,6 +7,11 @@ import java.sql.SQLException;
 public class JdbcContext {
     private Connection connection;
 	private static JdbcContext singleton = null;
+	private static DaoCompte daoCompte = new DaoCompteJdbcImpl();
+
+	public static DaoCompte getDaoCompte() {
+		return daoCompte;
+	}
 
     static {
 		try {

@@ -10,11 +10,28 @@ public class Visite {
 	private int numeroSalle;
 	private LocalDate date=LocalDate.now();
 	
+	
+	
+	public Visite(Integer numeroVisite, VisiteKey id, int numeroSalle, LocalDate date) {
+		super();
+		this.numeroVisite = numeroVisite;
+		this.id = id;
+		this.numeroSalle = numeroSalle;
+		this.date = date;
+	}
+
 	public Visite(VisiteKey id, int numeroSalle, LocalDate date) {
 		super();
 		this.id = id;
 		this.numeroSalle = numeroSalle;
 		this.date = date;
+	}
+	
+
+	public Visite(Integer numeroVisite, VisiteKey id) {
+		super();
+		this.numeroVisite = numeroVisite;
+		this.id = id;
 	}
 
 	@Override

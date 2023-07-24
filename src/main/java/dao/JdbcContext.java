@@ -4,27 +4,28 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import dao.DaoPatient;
-import dao.DaoPatientJdbcImpl;
 
 public class JdbcContext {
     private Connection connection;
 	private static JdbcContext singleton = null;
-
+	private static DaoVisite daoVisite = new DaoVisiteJdbcImpl();
 	private static DaoCompte daoCompte = new DaoCompteJdbcImpl();
+	private static DaoPatient daoPatient = new DaoPatientJdbcImpl();
 
 	public static DaoCompte getDaoCompte() {
 		return daoCompte;
 	}
-
-	private static DaoPatient daoPatient = new DaoPatientJdbcImpl();
 	
 	public static DaoPatient getDaoPatient() {
 		return daoPatient;
 
 	}
 
-    static {
+    public static DaoVisite getDaoVisite() {
+		return daoVisite;
+	}
+
+	static {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {

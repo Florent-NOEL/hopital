@@ -22,7 +22,7 @@ public class App {
 
 		String nom = saisieString("nom du patient");
 		String prenom = saisieString("prenom");
-		System.out.println(nom+prenom);
+		daoPatient.findByNomPrenom(nom,prenom);	
 
 	}
 
@@ -30,6 +30,8 @@ public class App {
 		
 	}
 
+
+	// prompt
 	static void saySomething(String msg) {
 		System.out.println(msg);
 	}

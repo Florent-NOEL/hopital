@@ -141,6 +141,29 @@ public class DaoPatientJdbcImpl implements DaoPatient {
 		return list;
 	}
 
+	public Patient findByNomPrenom(String nom, String prenom) {
+		PreparedStatement ps = null;
+		Patient patient = null;
+		ResultSet rs = null;
+		try {
+			ps = JdbcContext.getContext().getConnection()
+					.prepareStatement("select * from patient"
+							+ "where patient_nom=? and patient_prenom=?");
+			ps.setString(1, nom);
+			ps.setString(2, prenom);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				patient = getPatient(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		JdbcContext.close();
+		return patient;
+	}
+
+	
+
 	public List<Patient> findByNomContaining(String nom) {
 		PreparedStatement ps = null;
 		List<Patient> list = new ArrayList<>();

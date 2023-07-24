@@ -90,7 +90,7 @@ public class DaoPatientJdbcImpl implements DaoPatient {
 		
 	}
 
-	public Patient getPatient(ResultSet rs) throws SQLException {
+	public static Patient getPatient(ResultSet rs) throws SQLException {
 			Patient patient = new Patient(rs.getString("patient_nom"),
 					rs.getString("patient_prenom"));
 		

@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Visite;
-import model.VisiteKey;
 
 class DaoVisiteJdbcImpl implements DaoVisite {
 
@@ -23,8 +22,8 @@ class DaoVisiteJdbcImpl implements DaoVisite {
 					"insert into visite(visite_patient_id,visite_medecin_id,visite_salle,visite_date) "
 							+ "values(?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
-			ps.setInt(1, obj.getId().getPatient().getId());
-			ps.setInt(2, obj.getId().getMedecin().getId());
+			ps.setInt(1, obj.getPatient().getId());
+			ps.setInt(2, obj.getMedecin().getId());
 			if (obj.getNumeroSalle() != 0) {
 				ps.setInt(3, obj.getNumeroSalle());
 			} else {
@@ -53,8 +52,8 @@ class DaoVisiteJdbcImpl implements DaoVisite {
 			ps = JdbcContext.getContext().getConnection()
 					.prepareStatement("update visite set " + "visite_patient_id=?, visite_medecin_id=?, "
 							+ "visite_salle=?, visite_date=?) " + "values(?,?,?,?)");
-			ps.setInt(1, obj.getId().getPatient().getId());
-			ps.setInt(2, obj.getId().getMedecin().getId());
+			ps.setInt(1, obj.getPatient().getId());
+			ps.setInt(2, obj.getMedecin().getId());
 			if (obj.getNumeroSalle() != 0) {
 				ps.setInt(3, obj.getNumeroSalle());
 			} else {
@@ -95,14 +94,14 @@ class DaoVisiteJdbcImpl implements DaoVisite {
 	}
 
 	static Visite getVisite(ResultSet rs) throws SQLException {
-		VisiteKey visiteKey = new VisiteKey(DaoCompteJdbcImpl.getCompte(rs), DaoPatientJdbcImpl.getPatient(rs));
-		Visite visite = new Visite(rs.getInt("visite_numero"), visiteKey);
-		if (rs.getInt("visite_salle") != 0) {
-			visite.setNumeroSalle(rs.getInt("visite_salle"));
+		Visite visite = new Visite(rs.getInt("visite_numero"), DaoPatientJdbcImpl.getPatient(rs), rs.getInt("visite_salle"));
+		if (rs.getInt("visite_medecin_id") != 0) {
+			visite.setNumeroSalle(rs.getInt("visite_medecin_id"));
 		}
 		if (rs.getDate("visite_date") != null) {
 			visite.setDate(rs.getDate("visite__date").toLocalDate());
 		}
+		return visite;
 
 	}
 

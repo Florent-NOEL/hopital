@@ -5,33 +5,99 @@ import java.util.Objects;
 
 public class Visite {
 	private Integer numeroVisite;
-	private VisiteKey id;
+	private Patient patient;
+	private Medecin medecin;
 	private int tarif= 20;
 	private int numeroSalle;
 	private LocalDate date=LocalDate.now();
 	
-	
-	
-	public Visite(Integer numeroVisite, VisiteKey id, int numeroSalle, LocalDate date) {
+	public Visite(Patient patient, int numeroSalle) {
 		super();
-		this.numeroVisite = numeroVisite;
-		this.id = id;
+		this.patient = patient;
+		this.numeroSalle = numeroSalle;
+	}
+
+	public Visite(Patient patient, Medecin medecin, int numeroSalle, LocalDate date) {
+		super();
+		this.patient = patient;
+		this.medecin = medecin;
 		this.numeroSalle = numeroSalle;
 		this.date = date;
 	}
+	
+	
 
-	public Visite(VisiteKey id, int numeroSalle, LocalDate date) {
+	public Visite(Integer numeroVisite, Patient patient, int numeroSalle) {
 		super();
-		this.id = id;
+		this.numeroVisite = numeroVisite;
+		this.patient = patient;
+		this.numeroSalle = numeroSalle;
+	}
+
+	public Visite(Patient patient, Medecin medecin, int numeroSalle) {
+		super();
+		this.patient = patient;
+		this.medecin = medecin;
+		this.numeroSalle = numeroSalle;
+	}
+
+	public Visite(Integer numeroVisite, Patient patient, Medecin medecin, int numeroSalle, LocalDate date) {
+		super();
+		this.numeroVisite = numeroVisite;
+		this.patient = patient;
+		this.medecin = medecin;
 		this.numeroSalle = numeroSalle;
 		this.date = date;
 	}
 	
+	
 
-	public Visite(Integer numeroVisite, VisiteKey id) {
-		super();
+	public Integer getNumeroVisite() {
+		return numeroVisite;
+	}
+
+	public void setNumeroVisite(Integer numeroVisite) {
 		this.numeroVisite = numeroVisite;
-		this.id = id;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
+	}
+
+	public Medecin getMedecin() {
+		return medecin;
+	}
+
+	public void setMedecin(Medecin medecin) {
+		this.medecin = medecin;
+	}
+
+	public int getTarif() {
+		return tarif;
+	}
+
+	public void setTarif(int tarif) {
+		this.tarif = tarif;
+	}
+
+	public int getNumeroSalle() {
+		return numeroSalle;
+	}
+
+	public void setNumeroSalle(int numeroSalle) {
+		this.numeroSalle = numeroSalle;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
 	}
 
 	@Override
@@ -50,38 +116,11 @@ public class Visite {
 		Visite other = (Visite) obj;
 		return Objects.equals(numeroVisite, other.numeroVisite);
 	}
+	
+	
+	
 
-	public Integer getNumeroVisite() {
-		return numeroVisite;
-	}
-
-	public void setNumeroVisite(Integer numeroVisite) {
-		this.numeroVisite = numeroVisite;
-	}
-
-	public VisiteKey getId() {
-		return id;
-	}
-
-	public void setId(VisiteKey id) {
-		this.id = id;
-	}
-
-	public int getNumeroSalle() {
-		return numeroSalle;
-	}
-
-	public void setNumeroSalle(int numeroSalle) {
-		this.numeroSalle = numeroSalle;
-	}
-
-	public LocalDate getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
+	
 	
 	
 	

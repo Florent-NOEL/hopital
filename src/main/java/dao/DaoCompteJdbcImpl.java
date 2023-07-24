@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Compte;
+import model.Patient;
 
 public class DaoCompteJdbcImpl implements DaoCompte {
 
@@ -114,5 +115,13 @@ public class DaoCompteJdbcImpl implements DaoCompte {
 		JdbcContext.close();
 		return comptes;
     }
+
+	public static Compte getCompte(ResultSet rs) throws SQLException {
+			Compte compte = null;
+			compte= new Compte(rs.getString("compte_login"), rs.getString("compte_password"));
+            compte.setId(rs.getInt("compte_id"));
+            compte.setTypeCompte(rs.getString("compte_typeCompte"));
+			return compte;
+	}
     
 }

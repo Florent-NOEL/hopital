@@ -1,28 +1,27 @@
 package hopital;
 
-import java.time.LocalDate;
-
+import dao.DaoPatient;
 import dao.DaoVisite;
 import dao.JdbcContext;
 import model.Medecin;
 import model.Patient;
 import model.Visite;
-import model.VisiteKey;
 
 public class AppTestVisite {
 
 	public static void main(String[] args) {
 		
-		
-
+		testVisite();
 	}
 	
 	private static void testVisite() {
+		DaoPatient daoPatient = JdbcContext.getDaoPatient();
 		DaoVisite daoVisite = JdbcContext.getDaoVisite();
-		Patient pat1 = new Patient("nom1", "prenom1");
-		Medecin med1 = new Medecin("medecin1", "password1");
-		VisiteKey vKey = new VisiteKey(med1,pat1);
-		Visite visite1 = new Visite(vKey,1,LocalDate.now());
+		Patient pat4 = new Patient("nom4", "prenom4");
+		daoPatient.create(pat4);
+//		Patient pat1 = daoPatient.findByKey(1);
+//		Medecin med1 = new Medecin("medecin1", "password1");
+		Visite visite1 = new Visite(pat4,1);
 		daoVisite.create(visite1);
 	}
 

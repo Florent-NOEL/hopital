@@ -23,11 +23,11 @@ class DaoVisiteJdbcImpl implements DaoVisite {
 							+ "values(?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, obj.getPatient().getId());
-			ps.setInt(2, obj.getMedecin().getId());
-			if (obj.getNumeroSalle() != 0) {
-				ps.setInt(3, obj.getNumeroSalle());
+			ps.setInt(3, obj.getNumeroSalle());
+			if (obj.getMedecin().getId() != null) {
+				ps.setInt(2, obj.getMedecin().getId());
 			} else {
-				ps.setNull(3, Types.INTEGER);
+				ps.setNull(2, Types.INTEGER);
 			}
 			if (obj.getDate() != null) {
 				ps.setDate(4, Date.valueOf(obj.getDate()));
@@ -53,13 +53,12 @@ class DaoVisiteJdbcImpl implements DaoVisite {
 					.prepareStatement("update visite set " + "visite_patient_id=?, visite_medecin_id=?, "
 							+ "visite_salle=?, visite_date=?) " + "values(?,?,?,?)");
 			ps.setInt(1, obj.getPatient().getId());
-			ps.setInt(2, obj.getMedecin().getId());
-			if (obj.getNumeroSalle() != 0) {
-				ps.setInt(3, obj.getNumeroSalle());
-			} else {
-				ps.setNull(3, Types.INTEGER);
-			}
 			ps.setInt(3, obj.getNumeroSalle());
+			if (obj.getMedecin().getId() != null) {
+				ps.setInt(2, obj.getMedecin().getId());
+			} else {
+				ps.setNull(2, Types.INTEGER);
+			}
 			if (obj.getDate() != null) {
 				ps.setDate(4, Date.valueOf(obj.getDate()));
 			} else {

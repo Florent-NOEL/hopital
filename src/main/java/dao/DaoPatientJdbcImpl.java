@@ -16,14 +16,17 @@ public class DaoPatientJdbcImpl implements DaoPatient {
 	@Override
 	public void create(Patient obj) {
 		PreparedStatement ps = null;
-
+		ResultSet rs = null;
 		try {
 			ps = JdbcContext.getContext().getConnection()
-					.prepareStatement("insert into patient(patient_nom,patient_prenom) values(?,?) ");
+					.prepareStatement("insert into patient(patient_nom,patient_prenom) values(?,?) ", Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, obj.getNom());
 			ps.setString(2, obj.getPrenom());
-
 			ps.executeUpdate();
+			rs = ps.getGeneratedKeys();
+			if (rs.next()) {
+				obj.setId(rs.getInt(1));
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

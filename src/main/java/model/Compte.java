@@ -2,10 +2,11 @@ package model;
 
 import java.util.Objects;
 
-public abstract class Compte {
+public class Compte {
 	private Integer id;
 	private String login;
 	private String password;
+	private String typeCompte = null;
 	
 	
 	
@@ -39,6 +40,10 @@ public abstract class Compte {
 		return login;
 	}
 
+	public String getTypeCompte() {
+		return typeCompte;
+	}
+
 
 
 	public void setLogin(String login) {
@@ -55,6 +60,10 @@ public abstract class Compte {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public void setTypeCompte(String typeCompte) {
+		this.typeCompte = typeCompte;
 	}
 
 

@@ -1,17 +1,6 @@
 package dao;
-<<<<<<< HEAD
 import dao.JdbcContext;
 import model.Compte;
-
-public class App {
-    public static void main(String[] args) {
-        DaoCompte daoCompte = JdbcContext.getDaoCompte();
-        System.out.println(daoCompte.findAll());
-        
-        
-
-    }
-=======
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -23,12 +12,15 @@ import model.Patient;
 public class App {
 	
 	public static void main(String[] args) {
+		  DaoCompte daoCompte = JdbcContext.getDaoCompte();
+	        System.out.println(daoCompte.findAll());
+	        
 		DaoPatient daoPatient=JdbcContext.getDaoPatient();
-		Patient lucas=new Patient("Naejus", "Lucas");
-		daoPatient.create(lucas);
+		
+		
 		
 
 	}
 
->>>>>>> lucas
+
 }

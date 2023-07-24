@@ -10,17 +10,18 @@ import dao.DaoPatientJdbcImpl;
 public class JdbcContext {
     private Connection connection;
 	private static JdbcContext singleton = null;
-<<<<<<< HEAD
+
 	private static DaoCompte daoCompte = new DaoCompteJdbcImpl();
 
 	public static DaoCompte getDaoCompte() {
 		return daoCompte;
-=======
+	}
+
 	private static DaoPatient daoPatient = new DaoPatientJdbcImpl();
 	
 	public static DaoPatient getDaoPatient() {
 		return daoPatient;
->>>>>>> lucas
+
 	}
 
     static {

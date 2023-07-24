@@ -7,8 +7,15 @@ import java.sql.SQLException;
 public class JdbcContext {
     private Connection connection;
 	private static JdbcContext singleton = null;
+	private static DaoVisite daoVisite = new DaoVisiteJdbcImpl();
+	
+	
 
-    static {
+    public static DaoVisite getDaoVisite() {
+		return daoVisite;
+	}
+
+	static {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {

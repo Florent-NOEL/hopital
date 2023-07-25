@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Visite {
+public class Visite implements Serializable {
 	private Integer numeroVisite;
 	private Patient patient;
 	private Medecin medecin;

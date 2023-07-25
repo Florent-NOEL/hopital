@@ -14,7 +14,8 @@ import model.Secretaire;
 public class App {
 	
 	public static void main(String[] args) {
-		secretaire();
+		menue1();
+		menueSecretaire1();
 	
 	}
 
@@ -32,6 +33,35 @@ public class App {
 	public static void medecin(){
 		
 	}
+
+	//Menue
+	public static void menue1(){
+		System.out.println(
+			"////////////////Menu //////////////////////"+ "\n"
+			+"Please enter 1 or 2 "+"\n"
+			+"Secréraire : 1"+"\n"
+			+"Medecin : 2"+"\n"
+			+"/////////////////////////////////////////// \n"
+
+		);
+	}
+
+	public static void menueSecretaire1(){
+		System.out.println(
+			"///////////////Secrétaire///////////////////"+ "\n"
+			+"Ajouter patient à la file d'attente: 1"+"\n"
+			+"Secréraire : 2"+"\n"
+			+"Afficher l'etat de la file d'attente: 3"+"\n"
+			+"Partire en pause: 4"+"\n"
+			+"Ajouter un patient à la file d'attente: 4"+"\n"
+			+"/////////////////////////////////////////// \n"
+
+		);
+	}
+
+	
+
+
 
 
 	// prompt

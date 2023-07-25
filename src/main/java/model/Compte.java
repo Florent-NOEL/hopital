@@ -14,6 +14,15 @@ public class Compte {
 
 	}
 
+	
+
+	public Compte(Integer id, String login, String password) {
+		super();
+		this.id = id;
+		this.login = login;
+		this.password = password;
+	}
+
 
 
 	public Compte(String login, String password) {

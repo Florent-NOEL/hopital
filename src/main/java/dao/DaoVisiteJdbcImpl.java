@@ -9,6 +9,8 @@ import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Medecin;
+import model.Patient;
 import model.Visite;
 
 class DaoVisiteJdbcImpl implements DaoVisite {
@@ -23,12 +25,8 @@ class DaoVisiteJdbcImpl implements DaoVisite {
 							+ "values(?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, obj.getPatient().getId());
+			ps.setInt(2, obj.getMedecin().getId());
 			ps.setInt(3, obj.getNumeroSalle());
-			if (obj.getMedecin().getId() != null) {
-				ps.setInt(2, obj.getMedecin().getId());
-			} else {
-				ps.setNull(2, Types.INTEGER);
-			}
 			if (obj.getDate() != null) {
 				ps.setDate(4, Date.valueOf(obj.getDate()));
 			} else {
@@ -98,7 +96,7 @@ class DaoVisiteJdbcImpl implements DaoVisite {
 			visite.setNumeroSalle(rs.getInt("visite_medecin_id"));
 		}
 		if (rs.getDate("visite_date") != null) {
-			visite.setDate(rs.getDate("visite__date").toLocalDate());
+			visite.setDate(rs.getDate("visite_date").toLocalDate());
 		}
 		return visite;
 
@@ -112,13 +110,12 @@ class DaoVisiteJdbcImpl implements DaoVisite {
 		try {
 			ps = JdbcContext.getContext().getConnection()
 					.prepareStatement("select * from visite v join patient p on v.visite_patient_id=p.patient_id "
-							+ "join medecin m on v.visite_medecin_id=m.compte_id where visite_numero=?");
+							+ "join compte c on v.visite_medecin_id=c.compte_id where visite_numero=?");
 			ps.setInt(1, key);
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				visite = getVisite(rs);
 			}
-			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -135,10 +132,51 @@ class DaoVisiteJdbcImpl implements DaoVisite {
 			st = JdbcContext.getContext().getConnection()
 					.createStatement();
 			rs = st.executeQuery("select * from visite v join patient p on v.visite_patient_id=p.patient_id "
-					+ "join medecin m on v.visite_medecin_id=m.compte_id");
-			if (rs.next()) {
+					+ "join compte c on v.visite_medecin_id=c.compte_id");
+			while (rs.next()) {
 				list.add(getVisite(rs));
 			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		JdbcContext.close();
+		return list;
+	}
+	
+	public List<Visite> findByMedecin(Medecin medecin) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Visite> list = new ArrayList<>();
+		try {
+			ps = JdbcContext.getContext().getConnection()
+					.prepareStatement("select * from visite v join patient p on v.visite_patient_id=p.patient_id "
+							+ "join compte c on v.visite_medecin_id=c.compte_id where visite_medecin_id=?");
+			ps.setInt(1, medecin.getId());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				list.add(getVisite(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		JdbcContext.close();
+		return list;
+	}
+	
+	public List<Visite> findByPatient(Patient patient) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<Visite> list = new ArrayList<>();
+		try {
+			ps = JdbcContext.getContext().getConnection()
+					.prepareStatement("select * from visite v join patient p on v.visite_patient_id=p.patient_id "
+							+ "join compte c on v.visite_medecin_id=c.compte_id where visite_patient_id=?");
+			ps.setInt(1, patient.getId());
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				list.add(getVisite(rs));
+			}
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

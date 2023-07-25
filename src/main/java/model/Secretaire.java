@@ -29,6 +29,7 @@ public class Secretaire extends Compte {
 		
 	}
 
+	
 	public void ecrireListePatients(){
 		try {
 			FileOutputStream fos = new FileOutputStream("listePatients");
@@ -40,6 +41,8 @@ public class Secretaire extends Compte {
 			e.printStackTrace();
 		}
 	}
+	
+	//méthode supplémentaire écriture nom et prenom patients dans fichier txt
 
 	//getter and setter
 	public List<Patient> getPatients() {

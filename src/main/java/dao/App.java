@@ -14,9 +14,10 @@ import model.Secretaire;
 public class App {
 	
 	public static void main(String[] args) {
-		menue1();
-		menueSecretaire1();
-		menueSecretaire2();
+//		menue1();
+//		menueSecretaire1();
+//		menueSecretaire2();
+		secretaire();
 	
 	}
 

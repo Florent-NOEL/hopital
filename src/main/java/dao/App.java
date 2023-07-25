@@ -16,6 +16,7 @@ public class App {
 	public static void main(String[] args) {
 		menue1();
 		menueSecretaire1();
+		menueSecretaire2();
 	
 	}
 
@@ -54,8 +55,17 @@ public class App {
 			+"Afficher l'etat de la file d'attente: 3"+"\n"
 			+"Partire en pause: 4"+"\n"
 			+"Ajouter un patient à la file d'attente: 4"+"\n"
+			+"Menu principal: 5"+"\n"
 			+"/////////////////////////////////////////// \n"
 
+		);
+	}
+
+	public static void menueSecretaire2(){
+		System.out.println(
+			"///////////////Secrétaire ajouter patient////////////////"+"\n"
+			+"///////////////////////////////////////////"+ "\n"
+			
 		);
 	}
 

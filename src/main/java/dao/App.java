@@ -14,10 +14,10 @@ import model.Secretaire;
 public class App {
 	
 	public static void main(String[] args) {
-//		menue1();
+		menue1();
 //		menueSecretaire1();
 //		menueSecretaire2();
-		secretaire();
+		//secretaire();
 	
 	}
 
@@ -48,13 +48,13 @@ public class App {
 		);
 	}
 
+
 	public static void menueSecretaire1(){
 		System.out.println(
 			"///////////////Secrétaire///////////////////"+ "\n"
 			+"Ajouter patient à la file d'attente: 1"+"\n"
-			+"Secréraire : 2"+"\n"
-			+"Afficher l'etat de la file d'attente: 3"+"\n"
-			+"Partire en pause: 4"+"\n"
+			+"Afficher l'etat de la file d'attente: 2"+"\n"
+			+"Partire en pause: 3"+"\n"
 			+"Ajouter un patient à la file d'attente: 4"+"\n"
 			+"Menu principal: 5"+"\n"
 			+"/////////////////////////////////////////// \n"
@@ -70,6 +70,19 @@ public class App {
 		);
 	}
 
+	
+
+	public static void menueMedecin1(){
+		System.out.println(
+			"///////////////Médecin///////////////////"+ "\n"
+			+"Rendre sa salle dispo: 1"+"\n"
+			+"visualiser la liste d'attente : 2"+"\n"
+			+"afficher prochain patients: 3"+"\n"
+			+"Sauvgarder liste de visite: 4"+"\n"
+			+"Menu principal: 5"+"\n"
+			+"/////////////////////////////////////////// \n"
+		);
+	}
 	
 
 

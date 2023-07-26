@@ -22,6 +22,15 @@ public class Secretaire extends Compte {
 		setTypeCompte("secretaire");
 	}
 
+	
+
+	public Secretaire(Integer id, String login, String password) {
+		super(id, login, password);
+		setTypeCompte("secretaire");
+	}
+
+
+
 	public void addPatients(Patient patient){
 		DaoPatient daoPatient = JdbcContext.getDaoPatient();
 		Patient isKnowPatient = daoPatient.findByNomPrenom(patient.getNom(), patient.getPrenom());

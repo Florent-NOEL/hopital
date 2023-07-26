@@ -15,34 +15,43 @@ import model.Secretaire;
 public class App {
 	
 	public static void main(String[] args) {
-		Secretaire secretaire = new Secretaire("azeazeaze","azeazeaze");
-		secretaire(secretaire);
-//		menueSecretaire1();
-//		menueSecretaire2();
-		//secretaire();
+		login();
 	
 	}
 
 	//login
-/* 
-	public static Compte login(){
+ 
+	public static void login(){
 		DaoCompte daoCompte = JdbcContext.getDaoCompte();
 		String login;
 		String password;
 		Compte compte = null;
-		Medecin medecin = null;
-		Secretaire secretaire = null;
-		nom = saisieString("entrer votre nom:");
-		prenom = saisieString("entrer votre prénom:");
+		login = saisieString("entrer votre login:");
 		password = saisieString("entrer votre password:");
-		compte = daoCompte.findByNomPrenom(nom, prenom);
-		if(compte.getTypeCompte() == "medecin"){
-			medecin = new Medecin(compte.getLogin(), compte.getPassword());
-			return medecin;
-		} else if(compte.getTypeCompte() == "secretaire"){
-			secretaire = new Secretaire(compte.getLogin(), compte.getPassword());
-		} else{ return compte;}
-	} */
+		compte = daoCompte.findLoginAndPassword(login, password);
+		System.out.println(compte.getTypeCompte());
+		if(compte.getTypeCompte().equals("medecin")){
+			logMedecin(compte);
+		} else if(compte.getTypeCompte().equals("secretaire")){
+			logSecretaire(compte);
+		} else{ System.out.println("non renseigner");}
+	} 
+
+	public static void  logMedecin(Compte compte){
+		Medecin medecin = null;
+		medecin = new Medecin(compte.getId(),compte.getLogin(), compte.getPassword());
+		medecin(medecin);
+	}
+
+	public static void logSecretaire(Compte compte){
+		Secretaire secraitaire = null;
+		secraitaire = new Secretaire(compte.getId(),compte.getLogin(), compte.getPassword());
+		secretaire(secraitaire);
+	}
+
+
+
+
 
 	public static void secretaire(Secretaire secretaire){
 		menueSecretaire1();
@@ -81,9 +90,25 @@ public class App {
 	}
 
 	
-	
+	// medecin
 
-	public static void medecin(){
+	public static void medecin(Medecin medecin){
+		
+	}
+
+	public static void medecinOuvrirSalle(Medecin medecin){
+	//ajouter un controle du nombre de visite
+	}
+
+	public static void medecinVisualiserListePatient(Medecin medecin){
+
+	}
+
+	public static void medecinSauvgarderListeVisite(Medecin medecin){
+
+	}
+
+	public static void medecinIscrireVisiteDB(Medecin medecin){
 		
 	}
 

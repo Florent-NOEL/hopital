@@ -125,24 +125,27 @@ public class DaoCompteJdbcImpl implements DaoCompte {
 	}
 
 	@Override
-	public Compte findByNomPrenom(String nom, String prenom) {
+	public Compte findLoginAndPassword(String login, String password) {
 		
 		PreparedStatement ps = null;
 		Compte compte = null;
 		ResultSet rs = null;
 		try {
 			ps = JdbcContext.getContext().getConnection()
-					.prepareStatement("select * from compte where compte_nom=? and compte_prenom=?");
-			ps.setString(1, nom);
-			ps.setString(2, prenom);
+					.prepareStatement("select * from compte where compte_login=? and compte_password=?");
+			ps.setString(1, login);
+			ps.setString(2, password);
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				compte = getCompte(rs);
-				if(rs.getInt("compte_id") != 0){
+				if((rs.getInt("compte_id") != 0) & (rs.getString("compte_typeCompte") != null)){
 					compte.setId(rs.getInt("compte_id"));
-					compte.setLogin(rs.getString("compte_password"));
-					compte.setPassword(rs.getString("compte_typeCompte"));
-				} else{compte.setId(0);}
+					compte.setLogin(rs.getString("compte_login"));
+					compte.setPassword(rs.getString("compte_password"));
+					compte.setTypeCompte(rs.getString("compte_typeCompte"));
+				} else{compte.setId(0);
+					compte.setTypeCompte("null");
+				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -22,6 +22,18 @@ public class App {
 	
 	}
 
+	//login
+
+	public static void login(){
+		//add dao compt
+		String nom;
+		String prenom;
+		String password;
+		saisieInt("entrer votre nom:");
+		saisieInt("entrer votre prénom:");
+		saisieInt("entrer votre password:");
+
+	}
 
 	public static void secretaire(Secretaire secretaire){
 		menueSecretaire1();

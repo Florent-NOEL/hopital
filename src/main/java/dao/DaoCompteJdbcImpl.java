@@ -119,8 +119,14 @@ public class DaoCompteJdbcImpl implements DaoCompte {
 	public static Compte getCompte(ResultSet rs) throws SQLException {
 			Compte compte = null;
 			compte= new Compte(rs.getString("compte_login"), rs.getString("compte_password"));
-            compte.setId(rs.getInt("compte_id"));
-            compte.setTypeCompte(rs.getString("compte_typeCompte"));
+            if((rs.getInt("compte_id") != 0) & (rs.getString("compte_typeCompte") != null)){
+					compte.setId(rs.getInt("compte_id"));
+					compte.setLogin(rs.getString("compte_login"));
+					compte.setPassword(rs.getString("compte_password"));
+					compte.setTypeCompte(rs.getString("compte_typeCompte"));
+				} else{compte.setId(0);
+					compte.setTypeCompte("null");
+				}
 			return compte;
 	}
 
@@ -138,14 +144,6 @@ public class DaoCompteJdbcImpl implements DaoCompte {
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				compte = getCompte(rs);
-				if((rs.getInt("compte_id") != 0) & (rs.getString("compte_typeCompte") != null)){
-					compte.setId(rs.getInt("compte_id"));
-					compte.setLogin(rs.getString("compte_login"));
-					compte.setPassword(rs.getString("compte_password"));
-					compte.setTypeCompte(rs.getString("compte_typeCompte"));
-				} else{compte.setId(0);
-					compte.setTypeCompte("null");
-				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

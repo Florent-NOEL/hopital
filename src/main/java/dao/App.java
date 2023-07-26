@@ -14,23 +14,53 @@ import model.Secretaire;
 public class App {
 	
 	public static void main(String[] args) {
-		menue1();
+		Secretaire secretaire = new Secretaire("azeazeaze","azeazeaze");
+		secretaire(secretaire);
 //		menueSecretaire1();
 //		menueSecretaire2();
 		//secretaire();
 	
 	}
 
-	public static void secretaire(){
-		DaoPatient daoPatient = JdbcContext.getDaoPatient();
-		Secretaire secretaire1 = new Secretaire("flora", "123");
+
+	public static void secretaire(Secretaire secretaire){
+		menueSecretaire1();
+		int i= 0;
+		while( i !=4){
+			i = saisieInt("choisir un chiffre");
+			switch(i){
+				case 1: menueSecretaire2(); secretaireAddPatient(secretaire);
+				break;
+				case 2: menueSecretaire3(); secretaireAfficherFile(secretaire);
+				break;
+				case 3: menueSecretaire4();secretairePartirEnPause(secretaire);
+				break;
+				case 4: menue1();
+				break;
+			}
+		}
+	}
+	
+	public static void secretaireAddPatient(Secretaire secretaire){
+		
 		String nom = saisieString("nom du patient");
 		String prenom = saisieString("prenom");
 		Patient patient = new Patient(nom, prenom);
-		secretaire1.addPatients(patient);
-		secretaire1.ecrireListePatients();
+		secretaire.addPatients(patient);
 		
 	}
+
+	public static void secretairePartirEnPause(Secretaire secretaire){
+		secretaire.ecrireListePatients();
+		secretaire.ecritureFichierTexte();
+	}
+
+	public static void secretaireAfficherFile(Secretaire secretaire){
+		secretaire.afficherListeAttente();
+	}
+
+	
+	
 
 	public static void medecin(){
 		
@@ -55,8 +85,7 @@ public class App {
 			+"Ajouter patient à la file d'attente: 1"+"\n"
 			+"Afficher l'etat de la file d'attente: 2"+"\n"
 			+"Partire en pause: 3"+"\n"
-			+"Ajouter un patient à la file d'attente: 4"+"\n"
-			+"Menu principal: 5"+"\n"
+			+"Menu principal: 4"+"\n"
 			+"/////////////////////////////////////////// \n"
 
 		);
@@ -65,6 +94,22 @@ public class App {
 	public static void menueSecretaire2(){
 		System.out.println(
 			"///////////////Secrétaire ajouter patient////////////////"+"\n"
+			+"///////////////////////////////////////////"+ "\n"
+			
+		);
+	}
+
+	public static void menueSecretaire3(){
+		System.out.println(
+			"///////////////Afficher file////////////////"+"\n"
+			+"///////////////////////////////////////////"+ "\n"
+			
+		);
+	}
+
+	public static void menueSecretaire4(){
+		System.out.println(
+			"///////////////En pause////////////////"+"\n"
 			+"///////////////////////////////////////////"+ "\n"
 			
 		);

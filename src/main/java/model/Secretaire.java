@@ -1,7 +1,11 @@
 package model;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +23,7 @@ public class Secretaire extends Compte {
 	}
 
 	public void addPatients(Patient patient){
+		DaoPatient daoPatient = JdbcContext.getDaoPatient();
 		Patient isKnowPatient = daoPatient.findByNomPrenom(patient.getNom(), patient.getPrenom());
 		if(isKnowPatient == null){
 			daoPatient.create(patient);
@@ -42,7 +47,25 @@ public class Secretaire extends Compte {
 		}
 	}
 	
-	//méthode supplémentaire écriture nom et prenom patients dans fichier txt
+	public void ecritureFichierTexte() {
+		try {
+			PrintWriter out = new PrintWriter(new File("listePatients.txt"));
+			patients.stream().forEach(
+			obj ->{ out.println(obj.getNom()+" "+obj.getPrenom()+", ");
+		});
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void afficherListeAttente() {
+		patients.stream().forEach(
+			obj ->{ System.out.println(obj.getNom()+" "+obj.getPrenom()+", ");
+		});
+	}
+
+
 
 	//getter and setter
 	public List<Patient> getPatients() {

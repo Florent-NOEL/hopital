@@ -123,5 +123,32 @@ public class DaoCompteJdbcImpl implements DaoCompte {
             compte.setTypeCompte(rs.getString("compte_typeCompte"));
 			return compte;
 	}
+
+	@Override
+	public Compte findByNomPrenom(String nom, String prenom) {
+		
+		PreparedStatement ps = null;
+		Compte compte = null;
+		ResultSet rs = null;
+		try {
+			ps = JdbcContext.getContext().getConnection()
+					.prepareStatement("select * from compte where compte_nom=? and compte_prenom=?");
+			ps.setString(1, nom);
+			ps.setString(2, prenom);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				compte = getCompte(rs);
+				if(rs.getInt("compte_id") != 0){
+					compte.setId(rs.getInt("compte_id"));
+					compte.setLogin("compte_password");
+				} else{compte.setId(0);}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		JdbcContext.close();
+		return compte;
+		
+	}
     
 }

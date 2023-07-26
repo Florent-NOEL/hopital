@@ -11,11 +11,6 @@ import dao.JdbcContext;
 
 public class Medecin extends Compte implements Serializable {
 
-	public Medecin(String login, String password) {
-		super(login, password);
-		setTypeCompte("medecin");
-	}
-	
 	
 
 	public Medecin(Integer id, String login, String password) {
@@ -23,6 +18,10 @@ public class Medecin extends Compte implements Serializable {
 		setTypeCompte("medecin");
 	}
 
+	public Medecin(String login, String password) {
+		super(login, password);
+		setTypeCompte("medecin");
+	}
 
 
 	public void lectureListeAttente() {

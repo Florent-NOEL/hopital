@@ -1,6 +1,7 @@
 package dao;
 import dao.JdbcContext;
 import model.Compte;
+import model.Medecin;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -23,17 +24,25 @@ public class App {
 	}
 
 	//login
-
-	public static void login(){
-		//add dao compt
-		String nom;
-		String prenom;
+/* 
+	public static Compte login(){
+		DaoCompte daoCompte = JdbcContext.getDaoCompte();
+		String login;
 		String password;
-		saisieInt("entrer votre nom:");
-		saisieInt("entrer votre prénom:");
-		saisieInt("entrer votre password:");
-
-	}
+		Compte compte = null;
+		Medecin medecin = null;
+		Secretaire secretaire = null;
+		nom = saisieString("entrer votre nom:");
+		prenom = saisieString("entrer votre prénom:");
+		password = saisieString("entrer votre password:");
+		compte = daoCompte.findByNomPrenom(nom, prenom);
+		if(compte.getTypeCompte() == "medecin"){
+			medecin = new Medecin(compte.getLogin(), compte.getPassword());
+			return medecin;
+		} else if(compte.getTypeCompte() == "secretaire"){
+			secretaire = new Secretaire(compte.getLogin(), compte.getPassword());
+		} else{ return compte;}
+	} */
 
 	public static void secretaire(Secretaire secretaire){
 		menueSecretaire1();
@@ -41,11 +50,11 @@ public class App {
 		while( i !=4){
 			i = saisieInt("choisir un chiffre");
 			switch(i){
-				case 1: menueSecretaire2(); secretaireAddPatient(secretaire);
+				case 1: menueSecretaire2(); secretaireAddPatient(secretaire);menueSecretaire1();
 				break;
-				case 2: menueSecretaire3(); secretaireAfficherFile(secretaire);
+				case 2: menueSecretaire3(); secretaireAfficherFile(secretaire);menueSecretaire1();
 				break;
-				case 3: menueSecretaire4();secretairePartirEnPause(secretaire);
+				case 3: menueSecretaire4();secretairePartirEnPause(secretaire);menueSecretaire1();
 				break;
 				case 4: menue1();
 				break;

@@ -140,7 +140,8 @@ public class DaoCompteJdbcImpl implements DaoCompte {
 				compte = getCompte(rs);
 				if(rs.getInt("compte_id") != 0){
 					compte.setId(rs.getInt("compte_id"));
-					compte.setLogin("compte_password");
+					compte.setLogin(rs.getString("compte_password"));
+					compte.setPassword(rs.getString("compte_typeCompte"));
 				} else{compte.setId(0);}
 			}
 		} catch (SQLException e) {

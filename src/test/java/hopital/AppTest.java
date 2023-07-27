@@ -1,8 +1,10 @@
 package hopital;
 
 import dao.DaoCompte;
+import dao.DaoVisite;
 import dao.JdbcContext;
 import model.Medecin;
+import model.Visite;
 
 
 
@@ -15,10 +17,13 @@ public class AppTest {
 	
 	public static void medecin(){
 		DaoCompte daoCompte = JdbcContext.getDaoCompte();
+		DaoVisite daoVisite = JdbcContext.getDaoVisite();
+		Visite name = null;
 		Medecin med1 = new Medecin (daoCompte.findByKey(1).getId(),daoCompte.findByKey(1).getLogin(),daoCompte.findByKey(1).getPassword());
 		med1.lectureListeAttente();
 		med1.ouvertureSalle(1);
 		med1.saveVisitesMedecin();
+		med1.saveListeVisites();
 	}
 	
 //	private static void testVisite() {

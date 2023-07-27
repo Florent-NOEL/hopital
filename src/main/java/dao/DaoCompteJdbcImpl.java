@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Compte;
-import model.Patient;
+
 
 public class DaoCompteJdbcImpl implements DaoCompte {
 

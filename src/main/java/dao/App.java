@@ -16,12 +16,12 @@ import model.Visite;
 public class App {
 	
 	public static void main(String[] args) {
-//	Secretaire secretaire=null;
-//	secretaire(secretaire);
+
 		//login();
 		
 
 Medecin medecin = new Medecin(2,"medecin1", "medecin1");
+new Visite(1, null, 1);
 medecin(medecin);
 	}
 
@@ -109,7 +109,7 @@ medecin(medecin);
 				break;
 				case 2: menueMedecin3(); medecinVisualiserListePatient(medecin);menueMedecin1();
 				break;
-				case 3: menueMedecin4();medecinSauvegarderPatientDansListeVisite(medecin);menueMedecin1();
+				case 3: menueMedecin4();medecinSauvegarderListeVisite(medecin);menueMedecin1();
 				break;
 				case 4: menueMedecin5();medecinIscrireVisiteDB(medecin); menueMedecin1();
 				break;
@@ -121,11 +121,11 @@ medecin(medecin);
 
 	public static void medecinOuvrirSalle(Medecin medecin){
 		medecin.ouvertureSalle(1);
-//		if (Visite.getNumeroVisite()>10) {
-//			medecinIscrireVisiteDB(medecin);
-//		} else {
-//			menueMedecin1();
-//		}
+		if (Visite.getNumeroVisite()>10) {
+			medecinIscrireVisiteDB(medecin);
+		} else {
+			menueMedecin1();
+		}
 			
 		
 		
@@ -135,7 +135,7 @@ medecin(medecin);
 		medecin.lectureListeAttente();
 	}
 
-	public static void medecinSauvegarderPatientDansListeVisite(Medecin medecin){
+	public static void medecinSauvegarderListeVisite(Medecin medecin){
 		medecin.saveVisitesMedecin();
 
 	}
@@ -200,7 +200,7 @@ medecin(medecin);
 			"///////////////Médecin///////////////////"+ "\n"
 			+"Ouvrir sa salle dispo: 1"+"\n"
 			+"visualiser la liste d'attente : 2"+"\n"
-			+"Sauvegarder patient dans liste de visite: 3"+"\n"
+			+"Sauvegarder liste de visite: 3"+"\n"
 			+"Enregistrer la liste de visite : 4"+"\n"
 			+"Menu principal: 5"+"\n"
 			+"/////////////////////////////////////////// \n"
@@ -209,6 +209,8 @@ medecin(medecin);
 	
 	public static void menueMedecin2(){
 		System.out.println(
+				
+//			"///////////////Voulez-vous ouvrir la Salle?///////////////////"+ "\n"+
 			"///////////////Salle ouverte///////////////////"+ "\n"
 			+"/////////////////////////////////////////// "+"\n"
 		);

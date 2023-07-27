@@ -5,9 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import dao.JdbcContext;
 
@@ -47,12 +49,29 @@ public class Medecin extends Compte implements Serializable {
 			Visite visite = new Visite(patient, this, numSalle);
 			visites.add(visite);			
 			ois.close();
+			
+//			ObjectInputStream fichierEntree = new ObjectInputStream(new FileInputStream("listePatients.txt"));
+//			Scanner sc = new Scanner(fichierEntree);
+//			File file = new File("ListeVisite.txt");
+//			PrintWriter sortie = new PrintWriter(file);
+//			String ligneLu;
+//			while (sc.hasNextLine()) {
+//				ligneLu = sc.nextLine();
+//				ligneLu = ligneLu.replace("1 ere ligne", "");
+//				sortie.println(ligneLu);
+//			}
+//			sc.close();
+//			sortie.close();
+//			fichierEntree.delete();
+//			file.renameTo(new File("BUILDING.txt"));
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	// Méthode qui sauvegarde  dans un fichier la liste des visites inscrites dans la BDD pour un médecin
+	// Méthode qui sauvegarde dans un fichier la liste des visites inscrites dans la
+	// BDD pour un médecin
 	public void saveVisitesMedecin() {
 		try {
 			FileOutputStream fos = new FileOutputStream("liste_visites_medecin_" + this.getId());

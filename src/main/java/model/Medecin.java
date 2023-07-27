@@ -5,9 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import dao.JdbcContext;
 
@@ -24,35 +26,47 @@ public class Medecin extends Compte implements Serializable {
 		setTypeCompte("medecin");
 	}
 
-	public void lectureListeAttente() {
-		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("listePatients"));
-			List<Patient> fileAttente = (List<Patient>) ois.readObject();
-			fileAttente.forEach(patientLu -> {
-				System.out.println(patientLu.getPrenom() + " " + patientLu.getNom());
-			});
-			ois.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 	// méthode qui, à l'ouverture de la salle, attribut une visite au premier
 	// patient et ajoute cette visite dans la liste visites
 	public void ouvertureSalle(int numSalle) {
 		try {
-			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("listePatients"));
-			List<Patient> fileAttente = (List<Patient>) ois.readObject();
-			Patient patient = fileAttente.get(0);
-			Visite visite = new Visite(patient, this, numSalle);
-			visites.add(visite);			
-			ois.close();
+
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("listeAttente"));
+			patients = (List<Patient>) ois.readObject();
+			if(patients.size() !=0){
+				Patient patient = patients.get(0);
+				patients.remove(patient);
+				Visite visite = new Visite(patient, this, numSalle);
+				visites.add(visite);
+				ois.close();
+				ecrireListeAttente();
+			}else {
+				System.out.println("plus de patients fait une pause fréro !!");
+			}
+			
+//			ObjectInputStream fichierEntree = new ObjectInputStream(new FileInputStream("listePatients.txt"));
+//			Scanner sc = new Scanner(fichierEntree);
+//			File file = new File("ListeVisite.txt");
+//			PrintWriter sortie = new PrintWriter(file);
+//			String ligneLu;
+//			while (sc.hasNextLine()) {
+//				ligneLu = sc.nextLine();
+//				ligneLu = ligneLu.replace("1 ere ligne", "");
+//				sortie.println(ligneLu);
+//			}
+//			sc.close();
+//			sortie.close();
+//			fichierEntree.delete();
+//			file.renameTo(new File("BUILDING.txt"));
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	// Méthode qui sauvegarde  dans un fichier la liste des visites inscrites dans la BDD pour un médecin
+	// Méthode qui sauvegarde dans un fichier la liste des visites inscrites dans la
+	// BDD pour un médecin
 	public void saveVisitesMedecin() {
 		try {
 			FileOutputStream fos = new FileOutputStream("liste_visites_medecin_" + this.getId());
@@ -79,4 +93,11 @@ public class Medecin extends Compte implements Serializable {
 
 	}
 
+	public List<Visite> getVisites() {
+		return visites;
+	}
+
+	public void setVisites(List<Visite> visites) {
+		this.visites = visites;
+	}
 }

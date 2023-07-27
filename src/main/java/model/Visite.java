@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Visite implements Serializable {
-	private Integer numeroVisite;
+	private static Integer numeroVisite;
 	private Patient patient;
 	private Medecin medecin;
 	private int tarif= 20;
@@ -53,7 +53,7 @@ public class Visite implements Serializable {
 	
 	
 
-	public Integer getNumeroVisite() {
+	public static Integer getNumeroVisite() {
 		return numeroVisite;
 	}
 

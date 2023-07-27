@@ -1,20 +1,37 @@
 package model;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+
 
 public class Compte {
 	private Integer id;
 	private String login;
 	private String password;
 	private String typeCompte = null;
-	
+	protected List<Patient> patients = new ArrayList<>();
 	
 	
 	public Compte() {
 
 	}
 
-	
+	public void ecrireListeAttente(){
+		try {
+			FileOutputStream fos = new FileOutputStream("listeAttente");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			oos.writeObject(patients);
+			oos.close();
+			fos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public Compte(Integer id, String login, String password) {
 		super();
@@ -95,7 +112,24 @@ public class Compte {
 		Compte other = (Compte) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
 
+	public void setPatients(List<Patient> patients) {
+		this.patients = patients;
+	}
+	public List<Patient> getPatients() {
+		return patients;
+	}
+
+	public void lectureListeAttente() {
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("listeAttente"));
+			patients = (List<Patient>) ois.readObject();
+			patients.forEach(patientLu -> {
+				System.out.println(patientLu.getPrenom() + " " + patientLu.getNom());
+			});
+			ois.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

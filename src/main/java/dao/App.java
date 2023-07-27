@@ -10,13 +10,19 @@ import java.util.Scanner;
 import dao.DaoPatient;
 import model.Patient;
 import model.Secretaire;
+import model.Visite;
 
 
 public class App {
 	
 	public static void main(String[] args) {
-		login();
-	
+//	Secretaire secretaire=null;
+//	secretaire(secretaire);
+		//login();
+		
+
+Medecin medecin = new Medecin(2,"medecin1", "medecin1");
+medecin(medecin);
 	}
 
 	//login
@@ -93,23 +99,49 @@ public class App {
 	// medecin
 
 	public static void medecin(Medecin medecin){
-		
+		menueMedecin1();
+	
+		int i= 0;
+		while( i !=5){
+			i = saisieInt("choisir un chiffre");
+			switch(i){
+				case 1: menueMedecin2(); medecinOuvrirSalle(medecin);menueMedecin1();
+				break;
+				case 2: menueMedecin3(); medecinVisualiserListePatient(medecin);menueMedecin1();
+				break;
+				case 3: menueMedecin4();medecinSauvegarderPatientDansListeVisite(medecin);menueMedecin1();
+				break;
+				case 4: menueMedecin5();medecinIscrireVisiteDB(medecin); menueMedecin1();
+				break;
+				case 5:menue1();
+				break;	
+			}
+			}
 	}
 
 	public static void medecinOuvrirSalle(Medecin medecin){
-	//ajouter un controle du nombre de visite
+		medecin.ouvertureSalle(1);
+//		if (Visite.getNumeroVisite()>10) {
+//			medecinIscrireVisiteDB(medecin);
+//		} else {
+//			menueMedecin1();
+//		}
+			
+		
+		
 	}
 
 	public static void medecinVisualiserListePatient(Medecin medecin){
-
+		medecin.lectureListeAttente();
 	}
 
-	public static void medecinSauvgarderListeVisite(Medecin medecin){
+	public static void medecinSauvegarderPatientDansListeVisite(Medecin medecin){
+		medecin.saveVisitesMedecin();
 
 	}
 
 	public static void medecinIscrireVisiteDB(Medecin medecin){
-		
+		medecin.saveListeVisites();
 	}
 
 	//Menue
@@ -166,17 +198,44 @@ public class App {
 	public static void menueMedecin1(){
 		System.out.println(
 			"///////////////Médecin///////////////////"+ "\n"
-			+"Rendre sa salle dispo: 1"+"\n"
+			+"Ouvrir sa salle dispo: 1"+"\n"
 			+"visualiser la liste d'attente : 2"+"\n"
-			+"afficher prochain patients: 3"+"\n"
-			+"Sauvgarder liste de visite: 4"+"\n"
+			+"Sauvegarder patient dans liste de visite: 3"+"\n"
+			+"Enregistrer la liste de visite : 4"+"\n"
 			+"Menu principal: 5"+"\n"
 			+"/////////////////////////////////////////// \n"
 		);
 	}
 	
-
-
+	public static void menueMedecin2(){
+		System.out.println(
+			"///////////////Salle ouverte///////////////////"+ "\n"
+			+"/////////////////////////////////////////// "+"\n"
+		);
+	}
+	public static void menueMedecin3(){
+		System.out.println(
+			"///////////////Visualiser Liste Patient///////////////////"+ "\n"
+			+"/////////////////////////////////////////// "+ "\n"
+		);
+	}
+	
+	public static void menueMedecin4(){
+		System.out.println(
+			"///////////////Sauvegarder Liste Visite ///////////////////"+ "\n"
+			+"///////////////////////////////////////////"+"\n"
+		);
+	}
+	
+	public static void menueMedecin5(){
+		System.out.println(
+			"///////////////Enregistrer Liste Visite dans la base de donnée ///////////////////"+ "\n"
+			+"///////////////////////////////////////////"+"\n"
+		);
+	}
+	
+	
+	
 
 
 	// prompt

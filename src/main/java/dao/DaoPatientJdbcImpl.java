@@ -54,7 +54,6 @@ public class DaoPatientJdbcImpl implements DaoPatient {
 	@Override
 	public void delete(Patient obj) {
 		deleteByKey(obj.getId());
-		
 	}
 
 	@Override

@@ -16,7 +16,6 @@ public class App {
 	
 	public static void main(String[] args) {
 		login();
-	
 	}
 
 	//login
@@ -29,7 +28,6 @@ public class App {
 		login = saisieString("entrer votre login:");
 		password = saisieString("entrer votre password:");
 		compte = daoCompte.findLoginAndPassword(login, password);
-		System.out.println(compte.getTypeCompte());
 		if(compte.getTypeCompte().equals("medecin")){
 			logMedecin(compte);
 		} else if(compte.getTypeCompte().equals("secretaire")){
@@ -65,7 +63,7 @@ public class App {
 				break;
 				case 3: menueSecretaire4();secretairePartirEnPause(secretaire);menueSecretaire1();
 				break;
-				case 4: menue1();
+				case 4: login();
 				break;
 			}
 		}
@@ -131,7 +129,7 @@ public class App {
 			+"Ajouter patient à la file d'attente: 1"+"\n"
 			+"Afficher l'etat de la file d'attente: 2"+"\n"
 			+"Partire en pause: 3"+"\n"
-			+"Menu principal: 4"+"\n"
+			+"Menu login: 4"+"\n"
 			+"/////////////////////////////////////////// \n"
 
 		);

@@ -1,15 +1,12 @@
 package model;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import dao.JdbcContext;
 
@@ -44,21 +41,6 @@ public class Medecin extends Compte implements Serializable {
 			}else {
 				System.out.println("plus de patients fait une pause fréro !!");
 			}
-			
-//			ObjectInputStream fichierEntree = new ObjectInputStream(new FileInputStream("listePatients.txt"));
-//			Scanner sc = new Scanner(fichierEntree);
-//			File file = new File("ListeVisite.txt");
-//			PrintWriter sortie = new PrintWriter(file);
-//			String ligneLu;
-//			while (sc.hasNextLine()) {
-//				ligneLu = sc.nextLine();
-//				ligneLu = ligneLu.replace("1 ere ligne", "");
-//				sortie.println(ligneLu);
-//			}
-//			sc.close();
-//			sortie.close();
-//			fichierEntree.delete();
-//			file.renameTo(new File("BUILDING.txt"));
 		
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -91,6 +73,17 @@ public class Medecin extends Compte implements Serializable {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void lectureProchainPatient() {
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("listeAttente"));
+			patients = (List<Patient>) ois.readObject();
+			System.out.println(patients.get(0).getNom() + " " + patients.get(0).getPrenom());
+			ois.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<Visite> getVisites() {

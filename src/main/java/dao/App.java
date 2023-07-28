@@ -14,9 +14,7 @@ public class App {
 
 	public static void main(String[] args) {
 		login();
-		//Medecin medecin = new Medecin(2,"medecin1", "medecin1");
-		//new Visite(1, null, 1);
-		//medecin(medecin);
+		
 	}
 
 	public static void login(){
@@ -92,9 +90,6 @@ public class App {
 		DaoVisite daoVisite = JdbcContext.getDaoVisite();
 		List<Visite> list = daoVisite.findByPatient(patient);
 		list.forEach(visite -> {
-			//DaoCompte daoCompte = JdbcContext.getDaoCompte();
-			//Compte compte = daoCompte.findByKey(visite.)
-			//visite.setMedecin();
 			System.out.println("visite date: "+visite.getDate()+ " avec le Docteur : "+visite.getMedecin().getLogin());
 		});
 	}
@@ -105,18 +100,20 @@ public class App {
 		menueMedecin1();
 	
 		int i= 0;
-		while( i !=5){
+		while( i !=6){
 			i = saisieInt("choisir un chiffre");
 			switch(i){
 				case 1: menueMedecin2(); medecinOuvrirSalle(medecin);
 				break;
 				case 2: menueMedecin3(); medecinVisualiserListePatient(medecin);menueMedecin1();
 				break;
-				case 3: menueMedecin4();medecinSauvegarderListeVisite(medecin);menueMedecin1();
+				case 3: menueMedecin6(); medecinVisualiserProchainPatient(medecin);menueMedecin1();
 				break;
-				case 4: menueMedecin5();medecinIscrireVisiteDB(medecin); menueMedecin1();
+				case 4: menueMedecin4();medecinSauvegarderListeVisite(medecin);menueMedecin1();
 				break;
-				case 5:login();
+				case 5: menueMedecin5();medecinIscrireVisiteDB(medecin); menueMedecin1();
+				break;
+				case 6:login();
 				break;	
 			}
 			}
@@ -137,6 +134,10 @@ public class App {
 
 	public static void medecinVisualiserListePatient(Medecin medecin){
 		medecin.lectureListeAttente();
+	}
+	
+	public static void medecinVisualiserProchainPatient(Medecin medecin){
+		medecin.lectureProchainPatient();
 	}
 
 	public static void medecinSauvegarderListeVisite(Medecin medecin){
@@ -205,9 +206,10 @@ public class App {
 			"///////////////Médecin///////////////////"+ "\n"
 			+"Ouvrir sa salle: 1"+"\n"
 			+"visualiser la liste d'attente : 2"+"\n"
-			+"Sauvegarder votre liste de visite: 3"+"\n"
-			+"Enregistrer la liste de visite dans la BDD: 4"+"\n"
-			+"Menu principal: 5"+"\n"
+			+"visualiser le prochain patient : 3"+"\n"
+			+"Sauvegarder votre liste de visite: 4"+"\n"
+			+"Enregistrer la liste de visite dans la BDD: 5"+"\n"
+			+"Menu principal: 6"+"\n"
 			+"/////////////////////////////////////////// \n"
 		);
 	}
@@ -220,9 +222,18 @@ public class App {
 			+"/////////////////////////////////////////// "+"\n"
 		);
 	}
+	
+	
 	public static void menueMedecin3(){
 		System.out.println(
 			"///////////////Visualiser Liste Patient///////////////////"+ "\n"
+			+"/////////////////////////////////////////// "+ "\n"
+		);
+	}
+	
+	public static void menueMedecin6(){
+		System.out.println(
+			"///////////////Visualiser Prochain Patient///////////////////"+ "\n"
 			+"/////////////////////////////////////////// "+ "\n"
 		);
 	}

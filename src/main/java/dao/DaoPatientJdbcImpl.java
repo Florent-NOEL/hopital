@@ -4,11 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.JdbcContext;
 import model.Patient;
 
 public class DaoPatientJdbcImpl implements DaoPatient {
@@ -104,7 +102,6 @@ public class DaoPatientJdbcImpl implements DaoPatient {
 		List<Patient> list = new ArrayList<>();
 		Statement st = null;
 		ResultSet rs = null;
-		Patient patient = null;
 		try {
 			st = JdbcContext.getContext().getConnection().createStatement();
 			rs = st.executeQuery(

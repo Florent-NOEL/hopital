@@ -21,18 +21,19 @@ public class Secretaire extends Compte {
 		setTypeCompte("secretaire");
 	}
 
-
-
-	public void addPatients(Patient patient){
+	public Patient trouverPatient(Patient patient) {
 		DaoPatient daoPatient = JdbcContext.getDaoPatient();
 		Patient isKnowPatient = daoPatient.findByNomPrenom(patient.getNom(), patient.getPrenom());
 		if(isKnowPatient == null){
 			daoPatient.create(patient);
 			isKnowPatient = daoPatient.findByNomPrenom(patient.getNom(), patient.getPrenom());
-			
 		}
+		return isKnowPatient;
+	}
+
+	public void addPatients(Patient patient){
+		Patient isKnowPatient = trouverPatient(patient);
 		patients.add(isKnowPatient);
-		
 	}
 
 

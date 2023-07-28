@@ -174,9 +174,11 @@ class DaoVisiteJdbcImpl implements DaoVisite {
 			ps.setInt(1, patient.getId());
 			rs = ps.executeQuery();
 			while (rs.next()) {
-				list.add(getVisite(rs));
+				Visite visite = getVisite(rs);
+				Medecin medecin = new Medecin(rs.getString("compte_login"),rs.getString("compte_password"));
+				visite.setMedecin(medecin);
+				list.add(visite);
 			}
-			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -50,7 +50,7 @@ public class App {
 	public static void secretaire(Secretaire secretaire){
 		menueSecretaire1();
 		int i= 0;
-		while( i !=4){
+		while( i !=5){
 			i = saisieInt("choisir un chiffre");
 			switch(i){
 				case 1: menueSecretaire2(); secretaireAddPatient(secretaire);menueSecretaire1();
@@ -59,7 +59,9 @@ public class App {
 				break;
 				case 3: menueSecretaire4();secretairePartirEnPause(secretaire);menueSecretaire1();
 				break;
-				case 4: login();
+				case 4: secretaireAfficherVisitePatient(secretaire); menueSecretaire1();
+				break;
+				case 5: login();
 				break;
 			}
 		}
@@ -67,8 +69,8 @@ public class App {
 	
 	public static void secretaireAddPatient(Secretaire secretaire){
 		
-		String nom = saisieString("nom du patient");
-		String prenom = saisieString("prenom");
+		String nom = saisieString("nom du patient:");
+		String prenom = saisieString("prenom du patient:");
 		Patient patient = new Patient(nom, prenom);
 		secretaire.addPatients(patient);
 		secretaire.ecrireListeAttente();
@@ -83,7 +85,20 @@ public class App {
 		secretaire.lectureListeAttente();
 	}
 
-	
+	public  static void secretaireAfficherVisitePatient(Secretaire secretaire){
+		String nom = saisieString("nom du patient:");
+		String prenom = saisieString("prenom du patient:");
+		Patient patient = secretaire.trouverPatient(new Patient(nom, prenom));
+		DaoVisite daoVisite = JdbcContext.getDaoVisite();
+		List<Visite> list = daoVisite.findByPatient(patient);
+		list.forEach(visite -> {
+			//DaoCompte daoCompte = JdbcContext.getDaoCompte();
+			//Compte compte = daoCompte.findByKey(visite.)
+			//visite.setMedecin();
+			System.out.println("visite date: "+visite.getDate()+ " avec le Docteur : "+visite.getMedecin().getLogin());
+		});
+	}
+
 	// medecin
 
 	public static void medecin(Medecin medecin){
@@ -152,7 +167,8 @@ public class App {
 			+"Ajouter patient à la file d'attente: 1"+"\n"
 			+"Afficher l'etat de la file d'attente: 2"+"\n"
 			+"Partire en pause: 3"+"\n"
-			+"Menu login: 4"+"\n"
+			+"Afficher visite patients 4"+"\n"
+			+"Menu login: 5"+"\n"
 			+"/////////////////////////////////////////// \n"
 
 		);

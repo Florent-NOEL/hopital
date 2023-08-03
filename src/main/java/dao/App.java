@@ -13,8 +13,38 @@ import model.Visite;
 public class App {
 
 	public static void main(String[] args) {
-		login();
-		
+		hospitalApp();
+	}
+
+	public static void hospitalApp(){
+		int numero=0;
+		while (numero!=1 & numero!=2) {
+			numero= saisieInt("Entrer 1 pour creer un compte et 2 pour se connecter:");
+		}
+		if(numero == 1){
+			createCompte();
+		} else {
+			login();
+		}
+	}
+
+	public static void createCompte(){
+		DaoCompte daoCompte = JdbcContext.getDaoCompte();
+		String login;
+		String password;
+		int numero=0;
+		login = saisieString("entrer votre login:");
+		password = saisieString("entrer votre password:");
+
+		while (numero!=1 & numero!=2) {
+			numero= saisieInt("entrer 1 si vous êtes une secrétaire et 2 si vous êtes un medecin:");
+		}
+		if(numero == 1){
+			daoCompte.create(new Secretaire(login, password));
+		} else {
+			daoCompte.create(new Medecin(login, password));
+		}
+		hospitalApp();
 	}
 
 	public static void login(){
@@ -167,7 +197,7 @@ public class App {
 			"///////////////Secrétaire///////////////////"+ "\n"
 			+"Ajouter patient à la file d'attente: 1"+"\n"
 			+"Afficher l'etat de la file d'attente: 2"+"\n"
-			+"Partire en pause: 3"+"\n"
+			+"Partir en pause: 3"+"\n"
 			+"Afficher visite patients 4"+"\n"
 			+"Menu login: 5"+"\n"
 			+"/////////////////////////////////////////// \n"
